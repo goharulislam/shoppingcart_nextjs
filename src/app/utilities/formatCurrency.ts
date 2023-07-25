@@ -1,3 +1,4 @@
+'use client';
 const CURRENCY_FORMATTER = new Intl.NumberFormat(undefined, {
     currency: 'USD',
     style: 'currency'

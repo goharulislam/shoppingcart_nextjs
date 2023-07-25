@@ -1,6 +1,6 @@
+'use client';
 import { useShoppingCart } from "../context/ShoppingCartContext";
 import storeItems from '../data/items.json';
-import Button from "../micro/btnCart";
 import { formatCurrency } from "../utilities/formatCurrency";
 
 type CartItemProps = {
@@ -14,20 +14,17 @@ export function CartItem({id, quantity}: CartItemProps){
     if(item == null) return null;
 
     return (
-        <div className='gap-3 flex items-center'>
-            <img src={item.imageUrl} alt='selected item' className='w-[125px] h-[75px] object-cover' />
-            <div className='m-auto'>
+        <div className='flex items-start justify-start'>
+            <img src={item.imageUrl} alt='selected item' className='w-[125px] h-[75px] object-cover float-left mr-2' />
+            <div className='flex flex-col'>
                 <div>
-                    {item.name}{quantity && <span className='text-gray-700 text-[10px]'>x{quantity}</span>}
+                    {item.name}
+                    <div className='text-gray-700 text-[14px]'>{formatCurrency(item.price)}{quantity > 1 && <span className='text-gray-700 text-[14px]'> x {quantity}</span>}</div>
                 </div>
-                <div className='text-gray-700 text-[10px]'>{formatCurrency(item.price)}</div>
-                <div className='text-gray-700 text-[10px]'>{formatCurrency(item.price * quantity)}</div>
-                <Button onClick={()=>removeFromCart(item.id)}>&times;</Button>
-                <div className='me-0'>
-                    Total {formatCurrency(cartItems.reduce((total, cartItem) => {
-                    const item =storeItems.find(i => i.id === cartItem.id);
-                    return(total + (item?.price || 0) * cartItem.quantity)
-                }, 0))}</div>
+                <div className='flex items-center justify-between'>
+                    <div className='text-gray-700 font-bold text-[18px]'>{formatCurrency(item.price * quantity)}</div>
+                    <button onClick={()=>removeFromCart(item.id)} className='px-[7px] py-[0px] ml-1 bg-red-700 text-white cursor-pointer rounded-full'>&times;</button>
+                </div>
             </div>
         </div>
     )

@@ -1,6 +1,6 @@
 'use client';
 import {formatCurrency} from '../utilities/formatCurrency';
-import Button from '../micro/btnButton';
+import {BtnButton} from '../micro/btnButton';
 import { useShoppingCart } from '../context/ShoppingCartContext';
 
 type StoreItemProps = {
@@ -23,16 +23,16 @@ const quantity = getItemQuantity(id);
         <span className="ml-2 text-gray-500">{formatCurrency(price)}</span>
       </div>
       <div className='mt-auto'>
-        {quantity === 0 ? (<Button onClick={()=>increaseCartQuantity(id)}>+ Add to cart</Button>)
+        {quantity === 0 ? (<BtnButton onClick={()=>increaseCartQuantity(id)}>+ Add to cart</BtnButton>)
         :
         (
           <div className='flex items-center flex-col gap-2'>
             <div className='flex items-center justify-center gap-2'>
-              <Button onClick={()=>decreaseCartQuantity(id)}>-</Button>
+              <BtnButton onClick={()=>decreaseCartQuantity(id)}>-</BtnButton>
               <div><span>{quantity}</span> in cart</div>
-              <Button onClick={()=>increaseCartQuantity(id)}>+</Button>
+              <BtnButton onClick={()=>increaseCartQuantity(id)}>+</BtnButton>
             </div>
-            <Button onClick={()=>removeFromCart(id)}>Remove</Button>
+            <BtnButton onClick={()=>removeFromCart(id)}>Remove</BtnButton>
           </div>
         )}
       </div>
